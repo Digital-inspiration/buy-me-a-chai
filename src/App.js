@@ -33,7 +33,7 @@ function App() {
         console.log("isWalletConnected called"); 
         try {
             const {ethereum} = window;
-            const accounts = await ethereum.request({nethod : "eth_accounts"});
+            const accounts = await ethereum.request({method : "eth_accounts"});
             console.log("accounts: ", accounts);
             if(accounts.length > 0){
                 const account = accounts[0];
@@ -73,7 +73,7 @@ function App() {
             const {ethereum} = window;
             if(ethereum){
                 const provider = new ethers.BrowserProvider(ethereum);
-                const signer = provider.getSigner();
+                const signer = await provider.getSigner();
                 const buyMeAChai = new ethers.Contract(
                     contractAddress,
                     contractABI,
@@ -118,6 +118,8 @@ function App() {
         if(ethereum){
             const provider = new ethers.BrowserProvider(ethereum);
             const signer = provider.getSigner();
+            // const signer =  await provider.getSigner();
+
             const buyMeAChai = new ethers.Contract(
                 contractAddress,
                 contractABI,
@@ -140,7 +142,9 @@ function App() {
             const {ethereum} = window;
             if(ethereum){
                 const provider = new ethers.BrowserProvider(ethereum);
-                const signer =  provider.getSigner(); //await provider.getSigner();
+                // const signer =  provider.getSigner(); 
+                const signer =  await provider.getSigner();
+                
                 const buyMeAChai = new ethers.Contract(
                     contractAddress, 
                     contractABI, 
